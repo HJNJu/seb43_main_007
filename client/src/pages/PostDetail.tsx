@@ -8,6 +8,7 @@ import PostTitle from "../components/postdetail/PostTitle";
 import PostContent from "../components/postdetail/PostContent";
 import PostTags from "../components/postdetail/PostTags";
 import PostButtons from "../components/postdetail/PostButtons";
+import CreateComment from "../components/postdetail/CreateComment";
 import CommentList from "../components/postdetail/CommentList";
 import PostAddress from "../components/postdetail/PostAddress";
 import usePost from "../hooks/usePost";
@@ -41,8 +42,6 @@ function PostDetail() {
       return <div>존재하지 않는 게시글 입니다.</div>;
    }
 
-   const baordIdNumber = Number(boardIdString) || 0;
-
    return (
       <PostDetailContainer
          initial={{ opacity: 0 }}
@@ -51,7 +50,7 @@ function PostDetail() {
          exit={{ opacity: 0 }}
       >
          <PostTitle
-            boardId={baordIdNumber}
+            boardId={post.boardId}
             title={post.title}
             now={post.now}
             pick={post.pick}
@@ -68,10 +67,11 @@ function PostDetail() {
          <PostButtons
             memberId={post.memberId}
             handleDeletePost={handleDeletePost}
-            boardId={baordIdNumber}
+            boardId={post.boardId}
             category={post.category}
          />
-         <CommentList boardId={baordIdNumber} />
+         <CreateComment boardId={post.boardId} />
+         <CommentList boardId={post.boardId} />
       </PostDetailContainer>
    );
 }

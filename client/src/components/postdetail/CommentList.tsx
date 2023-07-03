@@ -1,12 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addComment } from "../../reducers/commentsSlice";
+import { useSelector } from "react-redux";
 import Comment from "./Comment";
-import { commentSuccess, commentError } from "../../util/toastify";
-import useCommentCharacterCount from "../../hooks/useCommentCharacterCount";
-import { DefaultButton } from "../mypage-profile/EditProfile";
-import { createComment } from "../../api/axios";
 import { RootState } from "../../store/store";
 
 interface CommentListProps {
@@ -14,11 +9,6 @@ interface CommentListProps {
 }
 
 function CommentList({ boardId }: CommentListProps) {
-   const dispatch = useDispatch();
-
-   // 멤버 아이디
-   const memberId = useSelector((state: RootState) => state.memberId);
-
    // 댓글
    const comments = useSelector((state: RootState) => state.comments.comments);
 
@@ -31,64 +21,23 @@ function CommentList({ boardId }: CommentListProps) {
       setSelectedCommentId(commentId);
    };
 
-   // 댓글 글자 수 알림
-   const maxLength = 300;
-   const { value, clearValue, characterCount, handleChange } =
-      useCommentCharacterCount({
-         maxLength,
-      });
-
-   // 댓글 등록 이벤트
-   const handleCommentSubmit = async (event: React.FormEvent) => {
-      event.preventDefault();
-      const response = await createComment(memberId, boardId, value);
-      if (response) {
-         const comment = response.data;
-         commentSuccess();
-         dispatch(addComment(comment));
-         clearValue();
-      } else {
-         commentError();
-      }
-   };
-
    return (
-      <>
-         <CreateCommentContainer>
-            <CommentInputBox>
-               <p className="letter-count">
-                  {characterCount}/{maxLength}
-               </p>
-               <textarea
-                  className="create-comment"
-                  placeholder="댓글을 입력해주세요."
-                  maxLength={maxLength}
-                  value={value}
-                  onChange={handleChange}
-               />
-            </CommentInputBox>
-            <DefaultButton type="submit" onClick={handleCommentSubmit}>
-               등록
-            </DefaultButton>
-         </CreateCommentContainer>
-         <CommentListContainer>
-            <ul className="comments">
-               {comments.map((comment) => {
-                  const isReplySelected =
-                     selectedCommentId === comment.commentId;
-                  return (
-                     <Comment
-                        key={comment.commentId}
-                        comment={comment}
-                        handleReplyClick={handleReplyClick}
-                        isReplySelected={isReplySelected}
-                        boardId={boardId}
-                     />
-                  );
-               })}
-            </ul>
-         </CommentListContainer>
-      </>
+      <CommentListContainer>
+         <ul className="comments">
+            {comments.map((comment) => {
+               const isReplySelected = selectedCommentId === comment.commentId;
+               return (
+                  <Comment
+                     key={comment.commentId}
+                     comment={comment}
+                     handleReplyClick={handleReplyClick}
+                     isReplySelected={isReplySelected}
+                     boardId={boardId}
+                  />
+               );
+            })}
+         </ul>
+      </CommentListContainer>
    );
 }
 
