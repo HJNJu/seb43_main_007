@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, getPostData } from "../api/axios";
-import { postDeleteSuccess, serverError } from "../util/toastify";
+import { getPostData } from "../api/axios";
 import { CommentType } from "../components/postdetail/commentType";
 import groupCommentsAndReplies from "../util/groupCommentsAndReplies";
 import { RootState } from "../store/store";
@@ -33,7 +31,6 @@ export interface Post {
 
 const usePost = (boardId: string) => {
    const dispatch = useDispatch();
-   const navigate = useNavigate();
    const [post, setPost] = useState<Post | null>(null);
    const [postDeleted, setPostDeleted] = useState(false);
 

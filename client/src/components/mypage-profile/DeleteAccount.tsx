@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { useCookies } from "react-cookie";
+import { RootState } from "../../store/store";
+import { deleteAccount } from "../../api/axios";
+import { serverError } from "../../util/toastify";
 import { ProfileEditContainer, TitleBox, SectionBox } from "./EditProfile";
 import AccountDeleteModal, { DeleteButton } from "./AccountDeleteModal";
 
@@ -11,6 +17,23 @@ function DeleteAccount() {
    };
    const closeModal = () => {
       setModalOpen(false);
+   };
+
+   const [, , removeCookie] = useCookies(["accessToken", "isAdmin"]);
+   const navigate = useNavigate();
+   const memberId = useSelector((state: RootState) => state.memberId);
+
+   const handleDeleteAccount = async () => {
+      const response = await deleteAccount(memberId);
+      if (response) {
+         removeCookie("accessToken");
+         removeCookie("isAdmin");
+         sessionStorage.removeItem("memberId");
+         navigate("/");
+         window.location.reload();
+      } else {
+         serverError();
+      }
    };
 
    return (
@@ -25,7 +48,11 @@ function DeleteAccount() {
             </DeleteGuide>
             <DeleteButton onClick={openModal}>계정 삭제</DeleteButton>
          </SectionBox>
-         <AccountDeleteModal open={modalOpen} close={closeModal} />
+         <AccountDeleteModal
+            open={modalOpen}
+            close={closeModal}
+            handleDeleteAccount={handleDeleteAccount}
+         />
       </ProfileEditContainer>
    );
 }

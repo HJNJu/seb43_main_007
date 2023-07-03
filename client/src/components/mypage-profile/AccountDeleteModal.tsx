@@ -1,33 +1,16 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { useCookies } from "react-cookie";
-import { RootState } from "../../store/store";
-import { deleteAccount } from "../../api/axios";
-import { serverError } from "../../util/toastify";
 
 export interface AccountDeleteModalProps {
    open: boolean;
    close: () => void;
+   handleDeleteAccount: () => void;
 }
 
-function AccountDeleteModal({ open, close }: AccountDeleteModalProps) {
-   const [, , removeCookie] = useCookies(["accessToken", "isAdmin"]);
-   const navigate = useNavigate();
-   const memberId = useSelector((state: RootState) => state.memberId);
-
-   const handleDeleteAccount = async () => {
-      const response = await deleteAccount(memberId);
-      if (response) {
-         removeCookie("accessToken");
-         removeCookie("isAdmin");
-         sessionStorage.removeItem("memberId");
-         navigate("/");
-         window.location.reload();
-      } else {
-         serverError();
-      }
-   };
+function AccountDeleteModal({
+   open,
+   close,
+   handleDeleteAccount,
+}: AccountDeleteModalProps) {
    return (
       <ModalContainer className={open ? "openModal" : "closeModal"}>
          <ModalContentBox>
