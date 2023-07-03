@@ -4,20 +4,16 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import PostDeleteModal from "./PostDeleteModal";
 import { RootState } from "../../store/store";
+import { deletePost } from "../../api/axios";
+import { postDeleteSuccess, serverError } from "../../util/toastify";
 
 export interface PostButtonsProps {
    memberId: number;
-   handleDeletePost: () => Promise<void>;
    boardId: number;
    category: string;
 }
 
-function PostButtons({
-   memberId,
-   handleDeletePost,
-   boardId,
-   category,
-}: PostButtonsProps) {
+function PostButtons({ memberId, boardId, category }: PostButtonsProps) {
    const [modalOpen, setModalOpen] = useState(false);
 
    const myMemberId = useSelector((state: RootState) => state.memberId);
@@ -38,6 +34,17 @@ function PostButtons({
 
    const handleToList = () => {
       navigate(`/communitylist/${category}`);
+   };
+
+   const handleDeletePost = async () => {
+      const response = await deletePost(boardId);
+      if (response) {
+         console.log("게시글 삭제");
+         postDeleteSuccess();
+         navigate("/communitylist");
+      } else {
+         serverError();
+      }
    };
 
    return (

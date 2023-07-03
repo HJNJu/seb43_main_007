@@ -16,7 +16,7 @@ import { RootState } from "../store/store";
 
 function PostDetail() {
    const { boardId: boardIdString } = useParams<{ [key: string]: string }>();
-   const { post, handleDeletePost, postDeleted } = usePost(boardIdString || "");
+   const { post, postDeleted } = usePost(boardIdString || "");
 
    // 로그인 상태가 아니면 로그인 페이지 이동
    const navigate = useNavigate();
@@ -66,7 +66,6 @@ function PostDetail() {
          <PostTags tags={post.tags} />
          <PostButtons
             memberId={post.memberId}
-            handleDeletePost={handleDeletePost}
             boardId={post.boardId}
             category={post.category}
          />

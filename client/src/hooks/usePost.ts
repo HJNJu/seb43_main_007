@@ -54,19 +54,7 @@ const usePost = (boardId: string) => {
       fetchPost();
    }, [dispatch, memberId, boardId]);
 
-   const handleDeletePost = async () => {
-      const response = await deletePost(parseInt(boardId, 10));
-      if (response) {
-         console.log("게시글 삭제");
-         postDeleteSuccess();
-         setPostDeleted(true);
-         navigate("/communitylist");
-      } else {
-         serverError();
-      }
-   };
-
-   return { post, handleDeletePost, postDeleted };
+   return { post, postDeleted };
 };
 
 export default usePost;
