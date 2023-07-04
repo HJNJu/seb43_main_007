@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { CommentType } from "./commentType";
+import CommentDeleteModal from "./CommentDeleteModal";
 import { deleteComment, editComment } from "../../api/axios";
 import { RootState } from "../../store/store";
 import { updateReply, deleteReply } from "../../reducers/commentsSlice";
@@ -64,8 +65,18 @@ function Reply({ comment, boardId, parentId }: ReplyProps) {
       setIsEditing(false);
    };
 
+   // 댓글 삭제 모달
+   const [modalOpen, setModalOpen] = useState(false);
+
+   const openModal = () => {
+      setModalOpen(true);
+   };
+   const closeModal = () => {
+      setModalOpen(false);
+   };
+
    // 대댓글 삭제
-   const handleDelete = async () => {
+   const handleDeleteComment = async () => {
       try {
          await deleteComment(comment.commentId);
          commentDeleteSuccess();
@@ -141,10 +152,15 @@ function Reply({ comment, boardId, parentId }: ReplyProps) {
                            <button
                               type="submit"
                               className="reply-btn reply-delete-btn"
-                              onClick={handleDelete}
+                              onClick={openModal}
                            >
                               삭제
                            </button>
+                           <CommentDeleteModal
+                              open={modalOpen}
+                              close={closeModal}
+                              handleDeleteComment={handleDeleteComment}
+                           />
                         </>
                      )
                   )}
