@@ -18,16 +18,13 @@ export interface CommentProps {
    comment: CommentType;
    handleReplyClick: (commentId: number | null) => void;
    isReplySelected: boolean;
-   boardId: number;
 }
 
-function Comment({
-   comment,
-   handleReplyClick,
-   isReplySelected,
-   boardId,
-}: CommentProps) {
+function Comment({ comment, handleReplyClick, isReplySelected }: CommentProps) {
    const dispatch = useDispatch();
+
+   // boardId
+   const boardId = useSelector((state: RootState) => state.boardId.boardId);
    // memberId
    const memberId = useSelector((state: RootState) => state.memberId);
    // 닉네임

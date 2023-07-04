@@ -5,6 +5,7 @@ import { CommentType } from "../components/postdetail/commentType";
 import groupCommentsAndReplies from "../util/groupCommentsAndReplies";
 import { RootState } from "../store/store";
 import { setComments } from "../reducers/commentsSlice";
+import { setBoardId } from "../reducers/boardIdSlice";
 
 export interface Post {
    memberId: number;
@@ -38,6 +39,8 @@ const usePost = (boardId: string) => {
 
    useEffect(() => {
       const fetchPost = async () => {
+         dispatch(setBoardId(parseInt(boardId, 10)));
+
          const data = await getPostData(memberId, parseInt(boardId, 10));
          if (data && data.comments) {
             const commentsWithReplies = groupCommentsAndReplies(data.comments);

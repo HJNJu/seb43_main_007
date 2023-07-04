@@ -22,7 +22,9 @@ function PostDetail() {
    const navigate = useNavigate();
    const { pathname } = useLocation();
    const history = createBrowserHistory();
+
    const memberId = useSelector((store: RootState) => store.memberId);
+
    useEffect(() => {
       // 로그인 상태가 아니면(memberId가 없으면)
       if (!memberId) {
@@ -70,7 +72,7 @@ function PostDetail() {
             category={post.category}
          />
          <CreateComment boardId={post.boardId} />
-         <CommentList boardId={post.boardId} />
+         <CommentList />
       </PostDetailContainer>
    );
 }

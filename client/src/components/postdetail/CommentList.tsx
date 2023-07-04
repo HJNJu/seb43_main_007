@@ -4,11 +4,7 @@ import { useSelector } from "react-redux";
 import Comment from "./Comment";
 import { RootState } from "../../store/store";
 
-interface CommentListProps {
-   boardId: number;
-}
-
-function CommentList({ boardId }: CommentListProps) {
+function CommentList() {
    // 댓글
    const comments = useSelector((state: RootState) => state.comments.comments);
 
@@ -32,7 +28,6 @@ function CommentList({ boardId }: CommentListProps) {
                      comment={comment}
                      handleReplyClick={handleReplyClick}
                      isReplySelected={isReplySelected}
-                     boardId={boardId}
                   />
                );
             })}

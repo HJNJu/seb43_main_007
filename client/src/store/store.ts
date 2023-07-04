@@ -3,7 +3,8 @@ import profilePhotoReducer from "../reducers/ProfilePhotoSlice";
 import profileNicknameSlice from "../reducers/ProfileNicknameSlice";
 import memberIdSlice from "../reducers/memberIdSlice";
 import isAdminSlice from "../reducers/isAdminSlice";
-import commentsReducer from "../reducers/commentsSlice";
+import commentsSlice from "../reducers/commentsSlice";
+import boardIdSlice from "../reducers/boardIdSlice";
 
 const store = configureStore({
    reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
       profileNickname: profileNicknameSlice,
       memberId: memberIdSlice,
       isAdmin: isAdminSlice,
-      comments: commentsReducer,
+      comments: commentsSlice,
+      boardId: boardIdSlice,
    },
 });
 

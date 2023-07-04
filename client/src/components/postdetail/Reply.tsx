@@ -44,6 +44,7 @@ function Reply({ comment, boardId, parentId }: ReplyProps) {
          memberId,
          editedComment
       );
+
       if (response) {
          commentEditSuccess();
          setIsEditing(false);
