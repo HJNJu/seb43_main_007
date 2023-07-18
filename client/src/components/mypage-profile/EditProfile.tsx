@@ -145,7 +145,7 @@ function EditProfile() {
                   <input
                      className="upload-name profile-input"
                      value={fileName}
-                     placeholder="jpeg, jpg, png 형식"
+                     placeholder="1MB 미만 jpeg, jpg, png"
                      readOnly
                   />
                   <label htmlFor="img-file" className="find-btn">
