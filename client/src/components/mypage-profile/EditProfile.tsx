@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { RootState } from "../../store/store";
 import validFunc from "../../util/signinValidFunc";
 import { setPhoto, resetPhoto } from "../../reducers/ProfilePhotoSlice";
@@ -49,7 +49,6 @@ function EditProfile() {
    );
 
    // Handlers
-   const onSubmit: SubmitHandler<SignupTypes> = (data) => console.log(data);
    const currentNickname = watch("nickname");
 
    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +106,7 @@ function EditProfile() {
    };
 
    return (
-      <ProfileEditContainer onSubmit={handleSubmit(onSubmit)}>
+      <ProfileEditContainer onSubmit={handleSubmit(handleSave)}>
          <TitleBox>프로필 관리</TitleBox>
          <SectionBox>
             <SubsectionBox>

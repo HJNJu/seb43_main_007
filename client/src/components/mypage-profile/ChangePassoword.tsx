@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import validFunc from "../../util/signinValidFunc";
 import {
@@ -43,8 +43,6 @@ function ChangePassoword() {
    const memberId = useSelector((state: RootState) => state.memberId);
 
    // Handlers
-   const onSubmit: SubmitHandler<PasswordChangeForm> = () => handleChange();
-
    const handleChange = () => {
       const { currentPassword, newPassword, confirmPassword } = getValues();
       updatePassword(memberId, currentPassword, newPassword, confirmPassword)
@@ -61,7 +59,7 @@ function ChangePassoword() {
    };
 
    return (
-      <ProfileEditContainer onSubmit={handleSubmit(onSubmit)}>
+      <ProfileEditContainer onSubmit={handleSubmit(handleChange)}>
          <TitleBox>비밀번호 변경</TitleBox>
          <SectionBox>
             <SubsectionBox>
