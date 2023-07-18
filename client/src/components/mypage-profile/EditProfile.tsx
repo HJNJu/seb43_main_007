@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { RootState } from "../../store/store";
 import validFunc from "../../util/signinValidFunc";
 import { setPhoto, resetPhoto } from "../../reducers/ProfilePhotoSlice";
-import { SignupTypes } from "../signup/contentsArray";
 import { setNickname } from "../../reducers/ProfileNicknameSlice";
 import {
    resetUserProfilePhoto,
@@ -20,6 +19,10 @@ import {
    serverError,
 } from "../../util/toastify";
 
+interface ProfileEditTypes {
+   nickname: string;
+}
+
 function EditProfile() {
    // useForm setup
    const {
@@ -27,7 +30,7 @@ function EditProfile() {
       handleSubmit,
       formState: { errors, isValid },
       watch,
-   } = useForm<SignupTypes>({
+   } = useForm<ProfileEditTypes>({
       mode: "onChange",
       criteriaMode: "all",
       defaultValues: {
