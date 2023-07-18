@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import validFunc from "../../util/signinValidFunc";
 import {
    ProfileEditContainer,
    TitleBox,
@@ -9,6 +8,7 @@ import {
    InputButtonContainer,
    DefaultButton,
 } from "./EditProfile";
+import passwordArr from "./passwordArray";
 import { updatePassword } from "../../api/axios";
 import { RootState } from "../../store/store";
 import {
@@ -62,70 +62,50 @@ function ChangePassoword() {
       <ProfileEditContainer onSubmit={handleSubmit(handleChange)}>
          <TitleBox>비밀번호 변경</TitleBox>
          <SectionBox>
-            <SubsectionBox>
-               <label htmlFor="current-password">현재 비밀번호</label>
-               <InputButtonContainer>
-                  <input
-                     id="current-password"
-                     type="password"
-                     className="profile-input"
-                     placeholder="현재 비밀번호"
-                     {...register("currentPassword", {
-                        required: "현재 비밀번호를 입력해주세요.",
-                     })}
-                  />
-               </InputButtonContainer>
-               {errors.currentPassword && (
-                  <p className="error-msg">{errors.currentPassword.message}</p>
-               )}
-            </SubsectionBox>
-            <SubsectionBox>
-               <label htmlFor="new-password">새로운 비밀번호</label>
-               <InputButtonContainer>
-                  <input
-                     id="new-password"
-                     type="password"
-                     className="profile-input"
-                     placeholder="영문, 숫자 포함 8자 이상 20자 이하"
-                     {...register("newPassword", {
-                        required: true,
-                        validate: (value) =>
-                           validFunc.validPassword(value) ||
-                           "영문, 숫자 포함 8자 이상 20자 이하여야 합니다",
-                     })}
-                  />
-               </InputButtonContainer>
-               {errors.newPassword && (
-                  <p className="error-msg">{errors.newPassword.message}</p>
-               )}
-            </SubsectionBox>
-            <SubsectionBox>
-               <label htmlFor="confirm-password">비밀번호 재확인</label>
-               <InputButtonContainer>
-                  <input
-                     id="confirm-password"
-                     type="password"
-                     className="profile-input"
-                     placeholder="새로운 비밀번호 재입력"
-                     {...register("confirmPassword", {
-                        required: true,
-                        validate: (value) =>
-                           value === getValues().newPassword ||
-                           "비밀번호가 일치하지 않습니다.",
-                     })}
-                  />
-                  <DefaultButton
-                     type="submit"
-                     disabled={!isValid}
-                     onClick={handleSubmit(handleChange)}
-                  >
-                     변경
-                  </DefaultButton>
-               </InputButtonContainer>
-               {errors.confirmPassword && (
-                  <p className="error-msg">{errors.confirmPassword.message}</p>
-               )}
-            </SubsectionBox>
+            {passwordArr.map((password) => (
+               <SubsectionBox key={password.content}>
+                  <label htmlFor={`${password.content}`}>
+                     {password.labelName}
+                  </label>
+                  <InputButtonContainer>
+                     <input
+                        id={`${password.content}`}
+                        type="password"
+                        className="profile-input"
+                        placeholder={password.placeholder}
+                        {...register(password.content, {
+                           required: password.required,
+                           validate:
+                              password.content !== "confirmPassword"
+                                 ? (value: string) =>
+                                      password.validFunction(value) ||
+                                      password.errorMessage
+                                 : (value: string) => {
+                                      const { newPassword } = getValues();
+                                      return (
+                                         newPassword === value ||
+                                         password.errorMessage
+                                      );
+                                   },
+                        })}
+                     />
+                     {password.content === "confirmPassword" && (
+                        <DefaultButton
+                           type="submit"
+                           disabled={!isValid}
+                           onClick={handleSubmit(handleChange)}
+                        >
+                           변경
+                        </DefaultButton>
+                     )}
+                  </InputButtonContainer>
+                  {errors[password.content] && (
+                     <p className="error-msg">
+                        {errors[password.content]?.message}
+                     </p>
+                  )}
+               </SubsectionBox>
+            ))}
          </SectionBox>
       </ProfileEditContainer>
    );
