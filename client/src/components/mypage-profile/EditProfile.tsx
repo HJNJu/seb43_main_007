@@ -61,6 +61,10 @@ function EditProfile() {
    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
+         if (file.size > 1048576) {
+            alert("파일 크기는 1MB 이하여야 합니다.");
+            return;
+         }
          setFileName(file.name);
          setPrevPhoto(currentPhoto);
          const reader = new FileReader();
@@ -153,13 +157,8 @@ function EditProfile() {
             </SubsectionBox>
             <SubsectionBox>
                <label htmlFor="profile-pic">프로필 사진</label>
+               <PhotoLimit>jpg, jpeg, png 지원 (최대 1MB)</PhotoLimit>
                <InputButtonContainer>
-                  <input
-                     className="upload-name profile-input"
-                     value={fileName}
-                     placeholder="1MB 미만 jpeg, jpg, png"
-                     readOnly
-                  />
                   <label htmlFor="img-file" className="find-btn">
                      파일 찾기
                   </label>
@@ -197,7 +196,7 @@ export const ProfileEditContainer = styled.div`
 `;
 
 export const TitleBox = styled.div`
-   font-size: 20px;
+   font-size: 23px;
    color: var(--first-color4);
    font-weight: 700;
    margin: 10px 0;
@@ -216,7 +215,7 @@ export const SubsectionBox = styled.div`
 
    label {
       font-weight: 600;
-      font-size: 13px;
+      font-size: 16px;
    }
 
    .error-msg {
@@ -226,9 +225,14 @@ export const SubsectionBox = styled.div`
    }
 `;
 
+export const PhotoLimit = styled.div`
+   margin: 10px 0;
+   font-size: 13px;
+`;
+
 export const InputButtonContainer = styled.div`
    display: flex;
-   margin-top: 3px;
+   margin-top: 5px;
    .profile-input {
       width: 500px;
       height: 32px;
@@ -268,7 +272,7 @@ export const InputButtonContainer = styled.div`
       border: 1px solid #c4dccb;
       color: var(--first-color4);
       cursor: pointer;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 400;
       outline: none;
       transition-duration: 3ms;

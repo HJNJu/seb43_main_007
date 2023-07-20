@@ -8,7 +8,7 @@ export const DefaultButton = styled.button`
    border: 1px solid #c4dccb;
    color: var(--first-color4);
    cursor: pointer;
-   font-size: 13px;
+   font-size: 15px;
    font-weight: 400;
    outline: none;
    text-align: center;
@@ -36,7 +36,7 @@ export const DeleteButton = styled.button`
    border: none;
    color: #860a0e;
    cursor: pointer;
-   font-size: 13px;
+   font-size: 15px;
    font-weight: 400;
    outline: none;
    text-align: center;
@@ -61,7 +61,7 @@ export const CancelButton = styled.button`
    border: none;
    color: var(--first-color4);
    cursor: pointer;
-   font-size: 13px;
+   font-size: 15px;
    font-weight: 400;
    outline: none;
    text-align: center;

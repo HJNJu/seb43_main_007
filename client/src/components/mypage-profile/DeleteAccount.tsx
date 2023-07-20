@@ -61,6 +61,6 @@ function DeleteAccount() {
 export default DeleteAccount;
 
 export const DeleteGuide = styled.span`
-   font-size: 13px;
+   font-size: 15px;
    margin-bottom: 20px;
 `;
