@@ -31,6 +31,7 @@ function ChangePassoword() {
       getValues,
       trigger,
       watch,
+      reset,
       formState: { errors, isValid },
    } = useForm<PasswordChangeForm>({
       mode: "onChange",
@@ -55,12 +56,14 @@ function ChangePassoword() {
       updatePassword(memberId, currentPassword, newPassword, confirmPassword)
          .then(() => {
             passwordChangeSuccess();
+            reset();
          })
          .catch((error) => {
             if (error.message === "현재 비밀번호 불일치") {
                passwordChangeRetry();
             } else if (error.message === "서버 오류") {
                serverError();
+               reset();
             }
          });
    };
