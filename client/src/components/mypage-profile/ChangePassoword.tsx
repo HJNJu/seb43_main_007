@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import {
    ProfileEditContainer,
    TitleBox,
@@ -24,11 +25,12 @@ export interface PasswordChangeForm {
 }
 
 function ChangePassoword() {
-   // useForm setup
    const {
       register,
       handleSubmit,
       getValues,
+      trigger,
+      watch,
       formState: { errors, isValid },
    } = useForm<PasswordChangeForm>({
       mode: "onChange",
@@ -42,7 +44,12 @@ function ChangePassoword() {
 
    const memberId = useSelector((state: RootState) => state.memberId);
 
-   // Handlers
+   const newPasswordWatch = watch("newPassword");
+
+   useEffect(() => {
+      trigger("confirmPassword");
+   }, [newPasswordWatch, trigger]);
+
    const handleChange = () => {
       const { currentPassword, newPassword, confirmPassword } = getValues();
       updatePassword(memberId, currentPassword, newPassword, confirmPassword)
