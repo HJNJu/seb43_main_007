@@ -20,6 +20,7 @@ import {
    photoChangeSuccess,
    serverError,
 } from "../../util/toastify";
+import PhotoDeleteModal from "./PhotoDeleteModal";
 
 interface ProfileEditTypes {
    nickname: string;
@@ -47,6 +48,8 @@ function EditProfile() {
    const [fileName, setFileName] = useState("");
    const [prevPhoto, setPrevPhoto] = useState("");
    const [modalOpen, setModalOpen] = useState(false);
+   const [uploadModalOpen, setUploadModalOpen] = useState(false);
+   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
    // Redux selector
@@ -73,7 +76,7 @@ function EditProfile() {
                const fileResult = event.target.result as string;
                setSelectedFile(file);
                setPrevPhoto(fileResult);
-               setModalOpen(true);
+               setUploadModalOpen(true);
             }
          };
          reader.readAsDataURL(file);
@@ -91,7 +94,7 @@ function EditProfile() {
                console.error("프로필 사진 변경에 실패하였습니다.", error);
                photoChangeError();
             });
-         setModalOpen(false);
+         setUploadModalOpen(false);
          setSelectedFile(null);
       }
    };
@@ -117,6 +120,7 @@ function EditProfile() {
          .then(() => {
             dispatch(resetPhoto());
             setFileName("");
+            setDeleteModalOpen(false);
          })
          .catch((error) => {
             console.error("프로필 사진 초기화에 실패하였습니다.", error);
@@ -162,11 +166,7 @@ function EditProfile() {
                   <label htmlFor="img-file" className="find-btn">
                      파일 찾기
                   </label>
-                  <DefaultButton
-                     type="button"
-                     className="photo-delete-btn"
-                     onClick={handleDelete}
-                  >
+                  <DefaultButton onClick={() => setDeleteModalOpen(true)}>
                      삭제
                   </DefaultButton>
                   <input
@@ -180,10 +180,15 @@ function EditProfile() {
             </SubsectionBox>
          </SectionBox>
          <PhotoUploadModal
-            open={modalOpen}
-            close={() => setModalOpen(false)}
+            open={uploadModalOpen}
+            close={() => setUploadModalOpen(false)}
             imgSrc={prevPhoto}
             handleConfirmUpload={handleConfirmUpload}
+         />
+         <PhotoDeleteModal
+            open={deleteModalOpen}
+            close={() => setDeleteModalOpen(false)}
+            handleDelete={handleDelete}
          />
       </ProfileEditContainer>
    );
