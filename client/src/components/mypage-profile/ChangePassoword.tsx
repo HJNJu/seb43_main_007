@@ -6,8 +6,8 @@ import {
    SectionBox,
    SubsectionBox,
    InputButtonContainer,
-   DefaultButton,
 } from "./EditProfile";
+import { DefaultButton } from "../../style/ButtonStyle";
 import passwordArr from "./passwordArray";
 import { updatePassword } from "../../api/axios";
 import { RootState } from "../../store/store";

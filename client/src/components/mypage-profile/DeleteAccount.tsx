@@ -7,7 +7,8 @@ import { RootState } from "../../store/store";
 import { deleteAccount } from "../../api/axios";
 import { serverError } from "../../util/toastify";
 import { ProfileEditContainer, TitleBox, SectionBox } from "./EditProfile";
-import AccountDeleteModal, { DeleteButton } from "./AccountDeleteModal";
+import AccountDeleteModal from "./AccountDeleteModal";
+import { DeleteButton } from "../../style/ButtonStyle";
 
 function DeleteAccount() {
    const [modalOpen, setModalOpen] = useState(false);

@@ -1,9 +1,8 @@
 import {
    ModalContainer,
    ModalContentBox,
-   DeleteButton,
-   CancelButton,
 } from "../mypage-profile/AccountDeleteModal";
+import { DeleteButton, CancelButton } from "../../style/ButtonStyle";
 
 export interface CommentDeleteModalProps {
    open: boolean;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../reducers/commentsSlice";
 import { commentSuccess, commentError } from "../../util/toastify";
 import useCommentCharacterCount from "../../hooks/useCommentCharacterCount";
-import { DefaultButton } from "../mypage-profile/EditProfile";
+import { DefaultButton } from "../../style/ButtonStyle";
 import { createComment } from "../../api/axios";
 import { RootState } from "../../store/store";
 

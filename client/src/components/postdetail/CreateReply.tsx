@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import useCommentCharacterCount from "../../hooks/useCommentCharacterCount";
-import { DefaultButton } from "../mypage-profile/EditProfile";
+import { DefaultButton } from "../../style/ButtonStyle";
 import { createReply } from "../../api/axios";
 import { RootState } from "../../store/store";
 import { addReply } from "../../reducers/commentsSlice";

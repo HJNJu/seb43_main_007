@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DeleteButton, CancelButton } from "../../style/ButtonStyle";
 
 export interface AccountDeleteModalProps {
    open: boolean;
@@ -105,45 +106,5 @@ export const ModalContentBox = styled.div`
          background-color: hsl(210, 8%, 95%);
          box-shadow: none;
       }
-   }
-`;
-
-export const DeleteButton = styled.button`
-   height: 32px;
-   width: 74px;
-   background-color: #ffd3d3;
-   border-radius: 3px;
-   border: none;
-   color: #860a0e;
-   cursor: pointer;
-   font-size: 13px;
-   font-weight: 400;
-   outline: none;
-   text-align: center;
-   transition-duration: 3ms;
-
-   &:hover {
-      background-color: #ffbebe;
-      color: #510003;
-   }
-
-   &:active {
-      background-color: #f9a2a2;
-      color: #510003;
-   }
-`;
-
-export const CancelButton = styled(DeleteButton)`
-   background-color: transparent;
-   border: none;
-   color: var(--first-color4);
-
-   &:hover {
-      background-color: transparent;
-      color: var(--first-color4);
-   }
-
-   &:active {
-      background-color: transparent;
    }
 `;
