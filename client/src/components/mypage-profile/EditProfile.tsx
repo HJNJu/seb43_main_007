@@ -233,11 +233,13 @@ export const PhotoLimit = styled.div`
 export const InputButtonContainer = styled.div`
    display: flex;
    margin-top: 5px;
+
    .profile-input {
       width: 500px;
       height: 32px;
       margin-right: 15px;
       font-size: 13px;
+      padding: 0 5px;
       border: 1px solid var(--light-gray);
    }
 
