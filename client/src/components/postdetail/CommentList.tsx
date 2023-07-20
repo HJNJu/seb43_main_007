@@ -46,39 +46,3 @@ export const CommentListContainer = styled.div`
       padding: 0;
    }
 `;
-
-export const CreateCommentContainer = styled.div`
-   background-color: var(--first-color2);
-   border-bottom: 1px solid var(--light-gray);
-   padding: 15px;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-`;
-
-export const CommentInputBox = styled.div`
-   display: flex;
-   align-items: center;
-
-   .letter-count {
-      font-size: 12px;
-      width: 50px;
-      text-align: end;
-      margin-right: 10px;
-      color: var(--dark-gray);
-   }
-
-   .create-comment {
-      height: 50px;
-      width: 895px;
-      resize: none;
-      border: 1px solid var(--light-gray);
-      border-radius: 3px;
-
-      &:focus {
-         box-shadow: 0 0 0 2px rgba(0, 149, 255, 0.15);
-         border: 1px solid var(--second-color3);
-         outline: none;
-      }
-   }
-`;

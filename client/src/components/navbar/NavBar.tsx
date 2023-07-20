@@ -90,7 +90,7 @@ interface StyledLinkProps extends LinkProps {
 export const StyledLink = styled(Link)<StyledLinkProps>`
    text-decoration: none;
    color: black;
-   font-size: 15px;
+   font-size: var(--font-base);
    display: flex;
    align-items: center;
    height: 30px;

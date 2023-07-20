@@ -205,7 +205,7 @@ export const ReplyAuthorInfo = styled.div`
       margin-right: 5px;
    }
    .reply-author {
-      font-size: 12px;
+      font-size: var(--font-small);
    }
 `;
 
@@ -215,11 +215,11 @@ export const ReplyContent = styled.div`
    margin-top: 3px;
 
    .reply-content {
-      font-size: 13px;
+      font-size: var(--font-base);
    }
 
    .reply-edit {
-      font-size: 13px;
+      font-size: var(--font-base);
       width: 100%;
       height: 100%;
       resize: none;
@@ -240,9 +240,13 @@ export const DateAndButton = styled.div`
    justify-content: space-between;
    align-items: flex-end;
    height: 100%;
-   font-size: 12px;
+   font-size: var(--font-small);
    width: 120px;
    margin-top: 3px;
+
+   .reply-createdAt {
+      font-size: var(--font-small);
+   }
 `;
 
 export const ReplyButtonContainer = styled.div`
@@ -253,7 +257,7 @@ export const ReplyButtonContainer = styled.div`
    .reply-btn {
       border: none;
       background-color: transparent;
-      font-size: 12px;
+      font-size: var(--font-small);
       cursor: pointer;
    }
 

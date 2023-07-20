@@ -75,7 +75,7 @@ export const CommentInputBox = styled.div`
    align-items: center;
 
    .letter-count {
-      font-size: 12px;
+      font-size: var(--font-small);
       width: 50px;
       text-align: end;
       margin-right: 10px;

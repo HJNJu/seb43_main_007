@@ -37,9 +37,9 @@ const GlobalStyles = createGlobalStyle`
         --dark-gray: #525960;
         --light-gray: #dfdfdf;
         
-        --font-large: 17px;
+        --font-large: 18px;
         --font-base: 15px;
-        --font-small: 10px;
+        --font-small: 13px;
     }
     ${reset}
     *{

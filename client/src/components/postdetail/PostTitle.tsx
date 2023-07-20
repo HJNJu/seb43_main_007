@@ -230,7 +230,7 @@ export const TitleBadgeContainer = styled.div`
    display: flex;
 
    .post-title {
-      font-size: 18px;
+      font-size: 20px;
       margin: 0;
    }
 `;
@@ -238,7 +238,7 @@ export const TitleBadgeContainer = styled.div`
 export const EditorPick = styled.div`
    width: 100px;
    height: 20px;
-   font-size: 13px;
+   font-size: var(--font-small);
    text-align: center;
    line-height: 18px;
    border-radius: 5px;
@@ -255,7 +255,7 @@ export const MarkContainer = styled.div`
    width: 180px;
 
    .pick-btn {
-      font-size: 12px;
+      font-size: var(--font-small);
       border: 1px solid black;
       border-radius: 3px;
       color: black;
@@ -300,7 +300,7 @@ export const BottomTitleContainer = styled.div`
    display: flex;
    justify-content: space-between;
    align-items: center;
-   font-size: 12px;
+   font-size: var(--font-small);
 `;
 
 export const AuthorDateContainer = styled.div`

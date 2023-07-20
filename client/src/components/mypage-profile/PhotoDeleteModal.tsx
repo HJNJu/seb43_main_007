@@ -84,7 +84,7 @@ export const ModalContentBox = styled.div`
       position: absolute;
       right: 12px;
       top: 12px;
-      font-size: 14px;
+      font-size: var(--font-base);
       font-weight: 600;
       padding: 12px;
       color: hsl(210, 8%, 45%);

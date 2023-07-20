@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import { DefaultButton } from "../mypage-profile/EditProfile";
+import { DefaultButton } from "../../style/ButtonStyle";
 
 function NavbarSearch() {
    const [, setSearch] = useState("");

@@ -18,7 +18,7 @@ export default PostAddress;
 
 export const PostAddressContainer = styled.div`
    margin: 10px 0 20px 15px;
-   font-size: 12px;
+   font-size: var(--font-small);
    display: flex;
    align-items: center;
 

@@ -91,13 +91,13 @@ export const PostButtonContainer = styled.div`
    margin-bottom: 15px;
    display: flex;
    justify-content: space-between;
-   font-size: 13px;
+   font-size: var(--font-base);
 
    .postdetail-btn {
       color: #787878;
       border: none;
       background-color: transparent;
-      font-size: 13px;
+      font-size: var(--font-base);
       cursor: pointer;
    }
 

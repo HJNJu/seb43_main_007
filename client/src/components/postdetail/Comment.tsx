@@ -215,7 +215,7 @@ export const AuthorInfo = styled.div`
       margin-right: 5px;
    }
    .comment-author {
-      font-size: 12px;
+      font-size: var(--font-small);
    }
 `;
 
@@ -224,11 +224,11 @@ export const CommentContent = styled.div`
    margin-top: 3px;
 
    .comment-content {
-      font-size: 13px;
+      font-size: var(--font-base);
    }
 
    .comment-edit {
-      font-size: 13px;
+      font-size: var(--font-base);
       width: 100%;
       height: 100%;
       resize: none;
@@ -249,7 +249,7 @@ export const DateAndReplyButton = styled.div`
    justify-content: space-between;
    align-items: flex-end;
    height: 100%;
-   font-size: 12px;
+   font-size: var(--font-small);
    width: 120px;
    margin-top: 3px;
 `;
@@ -262,7 +262,7 @@ export const CommentButtonContainer = styled.div`
    .comment-btn {
       border: none;
       background-color: transparent;
-      font-size: 12px;
+      font-size: var(--font-small);
       cursor: pointer;
    }
 
@@ -277,5 +277,5 @@ export const ReplyButton = styled.button`
    background-color: transparent;
    cursor: pointer;
    margin-top: 5px;
-   font-size: 12px;
+   font-size: var(--font-small);
 `;
