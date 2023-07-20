@@ -6,6 +6,8 @@ import { RootState } from "../../store/store";
 import validFunc from "../../util/signinValidFunc";
 import { setPhoto, resetPhoto } from "../../reducers/ProfilePhotoSlice";
 import { setNickname } from "../../reducers/ProfileNicknameSlice";
+import { DefaultButton } from "../../style/ButtonStyle";
+import PhotoUploadModal from "./PhotoUploadModal";
 import {
    resetUserProfilePhoto,
    updateNickname,
@@ -43,7 +45,9 @@ function EditProfile() {
 
    // State variables
    const [fileName, setFileName] = useState("");
-   const [, setPrevPhoto] = useState("");
+   const [prevPhoto, setPrevPhoto] = useState("");
+   const [modalOpen, setModalOpen] = useState(false);
+   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
    // Redux selector
    const memberId = useSelector((state: RootState) => state.memberId);
@@ -63,20 +67,28 @@ function EditProfile() {
          reader.onload = (event) => {
             if (event.target) {
                const fileResult = event.target.result as string;
+               setSelectedFile(file);
                setPrevPhoto(fileResult);
-               dispatch(setPhoto(fileResult));
-
-               updateUserProfilePhoto(memberId, file)
-                  .then(() => {
-                     photoChangeSuccess();
-                  })
-                  .catch((error) => {
-                     console.error("프로필 사진 변경에 실패하였습니다.", error);
-                     photoChangeError();
-                  });
+               setModalOpen(true);
             }
          };
          reader.readAsDataURL(file);
+      }
+   };
+
+   const handleConfirmUpload = () => {
+      if (selectedFile) {
+         dispatch(setPhoto(prevPhoto));
+         updateUserProfilePhoto(memberId, selectedFile)
+            .then(() => {
+               photoChangeSuccess();
+            })
+            .catch((error) => {
+               console.error("프로필 사진 변경에 실패하였습니다.", error);
+               photoChangeError();
+            });
+         setModalOpen(false);
+         setSelectedFile(null);
       }
    };
 
@@ -168,6 +180,12 @@ function EditProfile() {
                </InputButtonContainer>
             </SubsectionBox>
          </SectionBox>
+         <PhotoUploadModal
+            open={modalOpen}
+            close={() => setModalOpen(false)}
+            imgSrc={prevPhoto}
+            handleConfirmUpload={handleConfirmUpload}
+         />
       </ProfileEditContainer>
    );
 }
@@ -272,33 +290,5 @@ export const InputButtonContainer = styled.div`
       .photo-delete-btn {
          display: none;
       }
-   }
-`;
-
-export const DefaultButton = styled.button`
-   height: 32px;
-   width: 74px;
-   background-color: var(--first-color3);
-   border-radius: 3px;
-   border: 1px solid #c4dccb;
-   color: var(--first-color4);
-   cursor: pointer;
-   font-size: 13px;
-   font-weight: 400;
-   outline: none;
-   text-align: center;
-   transition-duration: 3ms;
-
-   &:hover:not(:disabled) {
-      background-color: #d4e6d9;
-   }
-
-   &:active:not(:disabled) {
-      background-color: #c4dccb;
-   }
-
-   &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
    }
 `;
