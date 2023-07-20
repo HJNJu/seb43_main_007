@@ -69,7 +69,7 @@ export const Membership = styled.div`
    flex-direction: column;
 
    .membership-title {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--dark-gray);
       margin: 5px 0;
    }

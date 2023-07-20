@@ -45,9 +45,7 @@ function EditProfile() {
    const dispatch = useDispatch();
 
    // State variables
-   const [fileName, setFileName] = useState("");
    const [prevPhoto, setPrevPhoto] = useState("");
-   const [modalOpen, setModalOpen] = useState(false);
    const [uploadModalOpen, setUploadModalOpen] = useState(false);
    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
    const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -68,7 +66,6 @@ function EditProfile() {
             alert("파일 크기는 1MB 이하여야 합니다.");
             return;
          }
-         setFileName(file.name);
          setPrevPhoto(currentPhoto);
          const reader = new FileReader();
          reader.onload = (event) => {
@@ -119,7 +116,6 @@ function EditProfile() {
       resetUserProfilePhoto(memberId)
          .then(() => {
             dispatch(resetPhoto());
-            setFileName("");
             setDeleteModalOpen(false);
          })
          .catch((error) => {
@@ -252,10 +248,6 @@ export const InputButtonContainer = styled.div`
       box-shadow: 0 0 0 2px rgba(0, 149, 255, 0.15);
       border: 1px solid var(--second-color3);
       outline: none;
-   }
-
-   .upload-name {
-      cursor: not-allowed;
    }
 
    .file-input {

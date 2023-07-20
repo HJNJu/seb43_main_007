@@ -44,7 +44,7 @@ export const MypageNavbarContainer = styled.div`
       padding: 6px 12px;
       border-radius: 1000px;
       color: var(--dark-gray);
-      font-size: 13px;
+      font-size: 15px;
       margin-right: 5px;
       text-decoration: none;
    }
