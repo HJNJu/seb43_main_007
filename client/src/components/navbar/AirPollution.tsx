@@ -51,7 +51,7 @@ export default AirPollution;
 
 export const AirPollutionContainer = styled.div`
    display: flex;
-   font-size: 13px;
+   font-size: 15px;
    margin-bottom: 10px;
 
    .icon {

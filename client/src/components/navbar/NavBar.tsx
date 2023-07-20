@@ -79,7 +79,7 @@ export const NavbarContainer = styled.div`
 
 export const Line = styled.div`
    border-bottom: 1px solid #e9ecef;
-   margin: 10px -15px;
+   margin: 12px -15px;
 `;
 
 interface StyledLinkProps extends LinkProps {
@@ -90,11 +90,11 @@ interface StyledLinkProps extends LinkProps {
 export const StyledLink = styled(Link)<StyledLinkProps>`
    text-decoration: none;
    color: black;
-   font-size: 13px;
+   font-size: 15px;
    display: flex;
    align-items: center;
    height: 30px;
-   margin: 5px 0;
+   margin: 8px 0;
    background-color: ${({ isSelected }) =>
       isSelected ? "var(--first-color3)" : "initial"};
    font-weight: ${({ isSelected }) => (isSelected ? 800 : "initial")};

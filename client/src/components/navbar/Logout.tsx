@@ -40,7 +40,7 @@ export const LogoutContainer = styled.div`
       padding: 0;
       border: none;
       background-color: transparent;
-      font-size: 13px;
+      font-size: 15px;
       color: var(--dark-gray);
       cursor: pointer;
 
